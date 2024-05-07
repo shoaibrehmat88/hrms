@@ -11,5 +11,24 @@ frappe.ui.form.on("Delivery Trip", {
 				});
 			}, __("Create"));
 		}
-	}
+		bulkPrintOption(frm);
+	},
+	setup: function(frm){
+		bulkPrintOption(frm);
+	},
+	onload: function(frm){
+		bulkPrintOption(frm);
+	},
+	bulk_print: function(frm) {
+		open_url_post(
+			'/api/method/erpnext.stock.doctype.delivery_trip.delivery_trip.generate_bulk_pdf',
+			{
+				docname: frm.doc.name
+			}
+		);
+	},
+
 })
+function bulkPrintOption(frm){
+	frm.add_custom_button(__('Print'), () => frm.events.bulk_print(frm));
+}
