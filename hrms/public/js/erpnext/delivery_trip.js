@@ -30,5 +30,6 @@ frappe.ui.form.on("Delivery Trip", {
 
 })
 function bulkPrintOption(frm){
-	frm.add_custom_button(__('Print'), () => frm.events.bulk_print(frm));
+	if (!frm.is_new())
+		frm.add_custom_button(__('Print'), () => frm.events.bulk_print(frm));
 }
